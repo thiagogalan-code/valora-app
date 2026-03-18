@@ -1602,7 +1602,7 @@ function renderReceitas(){
       var receitaAno=(b.aluguel||0)*12;
       var lucroLiq=receitaAno-custoAno;
       var rentab=b.valor>0?((receitaAno/b.valor)*100).toFixed(1):0;
-      return '<div style="display:flex;align-items:center;gap:13px;padding:13px;background:var(--navy3);border:1px solid var(--border);border-radius:11px;margin-bottom:9px;cursor:pointer;transition:border-color .15s" onmouseover="this.style.borderColor='var(--border2)'" onmouseout="this.style.borderColor='var(--border)'">'+ 
+      return '<div style="display:flex;align-items:center;gap:13px;padding:13px;background:var(--navy3);border:1px solid var(--border);border-radius:11px;margin-bottom:9px;cursor:pointer;transition:border-color .15s">'+ 
         '<div style="width:42px;height:42px;border-radius:11px;background:rgba(31,214,160,.13);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🏠</div>'+
         '<div style="flex:1;min-width:0">'+
           '<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+b.nome+'</div>'+
@@ -1645,7 +1645,7 @@ function renderReceitas(){
         '<td style="font-weight:500;color:'+(r.recebido>0?'var(--green)':'var(--muted)')+'">'+R(r.recebido)+'</td>'+
         '<td>'+(r.data||'—')+'</td>'+
         '<td>'+STATUS_MAP[r.status]+'</td>'+
-        '<td><button style="background:none;border:none;color:var(--muted2);cursor:pointer;font-size:12px;padding:3px 8px;border-radius:6px;border:1px solid var(--border);transition:all .15s" onmouseover="this.style.color='var(--red)';this.style.borderColor='rgba(240,76,76,.4)'" onmouseout="this.style.color='var(--muted2)';this.style.borderColor='var(--border)'" onclick="delReceita('+r.id+')">🗑️</button></td>'+
+        '<td><button style="background:none;border:none;color:var(--muted2);cursor:pointer;font-size:12px;padding:3px 8px;border-radius:6px;border:1px solid var(--border);transition:all .15s" onclick="delReceita('+r.id+')">🗑️</button></td>'+
       '</tr>';
     }).join('');
   document.getElementById('rec-foot-contrato').textContent=lista.length?R(totC):'—';
@@ -2205,39 +2205,38 @@ function gerarPDF(){
   setTimeout(function(){
     var content=document.getElementById('pdf-content').innerHTML;
     var win=window.open('','_blank');
-    win.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Relatório — Valora</title><meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Valora">
-<meta name="application-name" content="Valora">
-<meta name="theme-color" content="#1fd6a0">
-<meta name="msapplication-TileColor" content="#0c1520">
-<link rel="manifest" href="/manifest.json">
-<link rel="apple-touch-icon" href="/icon-192.svg">
-<link rel="icon" type="image/svg+xml" href="/icon-192.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"><style>body{margin:0;padding:30px;background:#f0f4f8;font-family:"DM Sans",sans-serif}.pdf-doc{max-width:700px;margin:0 auto;background:#fff;padding:36px 40px;border-radius:8px;font-size:12px;line-height:1.6;color:#1a1a2e}.pdf-brand{font-family:"DM Serif Display",serif;font-size:22px;color:#0c1520}.pdf-brand em{color:#1fd6a0;font-style:normal}.pdf-doc-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid #1fd6a0}.pdf-meta{text-align:right;font-size:11px;color:#6b82a0}.pdf-meta strong{display:block;font-size:13px;color:#1a1a2e;margin-bottom:2px}.pdf-section-title{font-size:13px;font-weight:700;color:#0c1520;margin:18px 0 10px;padding-left:10px;border-left:3px solid #1fd6a0;text-transform:uppercase;letter-spacing:.5px}.pdf-table{width:100%;border-collapse:collapse;margin-bottom:16px}.pdf-table th{padding:7px 10px;text-align:left;font-size:10px;font-weight:600;color:#6b82a0;text-transform:uppercase;letter-spacing:.5px;background:#f4f7fb;border-bottom:1px solid #e2e8f0}.pdf-table td{padding:8px 10px;font-size:12px;color:#2d3748;border-bottom:1px solid #e2e8f0}.pdf-total-row td{font-weight:700;color:#0c1520;background:#f0fdf9;border-top:2px solid #1fd6a0}.pdf-kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}.pdf-kpi{background:#f4f7fb;border-radius:8px;padding:12px 14px;text-align:center}.pdf-kpi-val{font-family:"DM Serif Display",serif;font-size:20px;color:#0c1520;display:block}.pdf-kpi-lbl{font-size:10px;color:#6b82a0;text-transform:uppercase;letter-spacing:.5px}.pdf-footer{margin-top:24px;padding-top:12px;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;font-size:10px;color:#9aa8b8}.pdf-alert-box{background:#fff8f0;border-left:3px solid #f5a623;padding:10px 14px;border-radius:0 6px 6px 0;margin:8px 0;font-size:12px;color:#744210}.pdf-alert-box strong{color:#92400e;display:block;margin-bottom:2px}@media print{body{background:#fff;padding:0}}</style></head><body>'+content+'<script>window.print();<\/script>
-<!-- PWA Install Banner -->
-<div id="pwa-banner">
-  <div class="pwa-icon"><img src="/icon-192.svg" alt="Valora"></div>
-  <div class="pwa-text">
-    <div class="pwa-title">Instalar Valora</div>
-    <div class="pwa-sub">Adicione à tela inicial — acesso offline</div>
-  </div>
-  <div class="pwa-actions">
-    <button class="pwa-btn-install" onclick="installPWA()">Instalar</button>
-    <button class="pwa-btn-dismiss" onclick="dismissBanner()">Agora não</button>
-  </div>
-</div>
-
-<!-- iOS Install Hint -->
-<div id="ios-hint">
-  <button class="ios-close" onclick="document.getElementById("ios-hint").style.display='none'">✕</button>
-  <p>Para instalar o <strong>Valora</strong> no seu iPhone:<br>
-  Toque em <strong>⎙ Compartilhar</strong> e depois em<br>
-  <strong>"Adicionar à Tela de Início"</strong></p>
-</div>
-
-</body></html>');
+    if(!win){alert('Permita pop-ups para gerar o PDF.');return;}
+    var html=[
+      '<!DOCTYPE html><html><head>',
+      '<meta charset="UTF-8">',
+      '<title>Relatório — Valora</title>',
+      '<link rel="preconnect" href="https://fonts.googleapis.com">',
+      '<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">',
+      '<style>',
+      'body{margin:0;padding:30px;background:#f0f4f8;font-family:"DM Sans",sans-serif}',
+      '.pdf-doc{max-width:700px;margin:0 auto;background:#fff;padding:36px 40px;border-radius:8px;font-size:12px;line-height:1.6;color:#1a1a2e}',
+      '.pdf-brand{font-family:"DM Serif Display",serif;font-size:22px;color:#0c1520}',
+      '.pdf-brand em{color:#1fd6a0;font-style:normal}',
+      '.pdf-doc-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid #1fd6a0}',
+      '.pdf-meta{text-align:right;font-size:11px;color:#6b82a0}',
+      '.pdf-meta strong{display:block;font-size:13px;color:#1a1a2e;margin-bottom:2px}',
+      '.pdf-section-title{font-size:13px;font-weight:700;color:#0c1520;margin:18px 0 10px;padding-left:10px;border-left:3px solid #1fd6a0;text-transform:uppercase;letter-spacing:.5px}',
+      '.pdf-table{width:100%;border-collapse:collapse;margin-bottom:16px}',
+      '.pdf-table th{padding:7px 10px;text-align:left;font-size:10px;font-weight:600;color:#6b82a0;text-transform:uppercase;background:#f4f7fb;border-bottom:1px solid #e2e8f0}',
+      '.pdf-table td{padding:8px 10px;font-size:12px;color:#2d3748;border-bottom:1px solid #e2e8f0}',
+      '.pdf-total-row td{font-weight:700;color:#0c1520;background:#f0fdf9;border-top:2px solid #1fd6a0}',
+      '.pdf-kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}',
+      '.pdf-kpi{background:#f4f7fb;border-radius:8px;padding:12px 14px;text-align:center}',
+      '.pdf-kpi-val{font-family:"DM Serif Display",serif;font-size:20px;color:#0c1520;display:block}',
+      '.pdf-kpi-lbl{font-size:10px;color:#6b82a0;text-transform:uppercase;letter-spacing:.5px}',
+      '.pdf-footer{margin-top:24px;padding-top:12px;border-top:1px solid #e2e8f0;display:flex;justify-content:space-between;font-size:10px;color:#9aa8b8}',
+      '@media print{body{background:#fff;padding:0}}',
+      '</style></head><body>',
+      content,
+      '<script>window.print();<\/script>',
+      '</body></html>'
+    ].join('');
+    win.document.write(html);
     win.document.close();
     toast('✅ PDF aberto!','Use Ctrl+P / Cmd+P para salvar como PDF.');
   },800);
