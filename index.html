@@ -16,8 +16,7 @@
 <link rel="icon" type="image/svg+xml" href="/icon-192.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -557,7 +556,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     </div>
     <div class="topbar-right">
       <div class="notif-btn" onclick="toast('🔔 Notificações','3 novos alertas de vencimento.')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><div class="notif-dot"></div></div>
-      <div class="user-menu" onclick="openModal("logout-m")"><div class="user-av">RB</div><div><div class="user-nm">Roberto</div><div class="user-rl">Premium</div></div><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:var(--muted);margin-left:5px"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="user-menu" onclick="openModal('logout-m')"><div class="user-av">RB</div><div><div class="user-nm">Roberto</div><div class="user-rl">Premium</div></div><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:var(--muted);margin-left:5px"><polyline points="6 9 12 15 18 9"/></svg></div>
     </div>
   </nav>
 
@@ -611,7 +610,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     <div class="section" id="sec-bens">
       <div class="page-hd">
         <div><h1 class="page-title">Meus Bens</h1><p class="page-sub">Gerencie todo o seu patrimônio em um lugar</p></div>
-        <button class="btn-add" onclick="openModal("add-bem-m")"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Adicionar Bem</button>
+        <button class="btn-add" onclick="openModal('add-bem-m')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Adicionar Bem</button>
       </div>
       <div class="summary-grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
         <div class="s-card sc-total"><div class="s-icon">💰</div><div class="s-label">Valor Total dos Bens</div><div class="s-value" id="bens-total-v">R$ 520.000</div><span class="badge bg">3 bens cadastrados</span></div>
@@ -635,11 +634,11 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     <div class="section" id="sec-despesas">
       <div class="page-hd">
         <div><h1 class="page-title">Despesas & Cartões</h1><p class="page-sub">Controle seus gastos por cartão e categoria</p></div>
-        <button class="btn-add" onclick="openModal("add-cc-m")"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nova Compra</button>
+        <button class="btn-add" onclick="openModal('add-cc-m')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nova Compra</button>
       </div>
 
       <div class="dicas-panel" id="dicas-panel">
-        <div class="panel-hd"><span class="panel-title">💡 Análise Inteligente dos seus Gastos</span><button class="panel-action" onclick="this.closest(".dicas-panel").style.display='none'">Ocultar</button></div>
+        <div class="panel-hd"><span class="panel-title">💡 Análise Inteligente dos seus Gastos</span><button class="panel-action" onclick=\"this.closest('.dicas-panel').style.display='none'">Ocultar</button></div>
         <div id="dicas-content"></div>
       </div>
 
@@ -700,7 +699,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     <div class="section" id="sec-receitas">
       <div class="page-hd">
         <div><h1 class="page-title">Receitas de Aluguel</h1><p class="page-sub">Acompanhe os recebimentos dos seus imóveis alugados</p></div>
-        <button class="btn-add" onclick="openModal("add-rec-m")">
+        <button class="btn-add" onclick="openModal('add-rec-m')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Registrar Recebimento
         </button>
@@ -855,7 +854,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     <div class="section" id="sec-metas">
       <div class="page-hd">
         <div><h1 class="page-title">Metas & Orçamentos</h1><p class="page-sub">Defina limites de gastos por categoria e acompanhe o progresso</p></div>
-        <button class="btn-add" onclick="openModal("add-meta-m")">
+        <button class="btn-add" onclick="openModal('add-meta-m')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Nova Meta
         </button>
@@ -873,7 +872,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     <div class="section" id="sec-contratos">
       <div class="page-hd">
         <div><h1 class="page-title">Contratos de Aluguel</h1><p class="page-sub">Gerencie contratos, reajustes IGPM/IPCA e inquilinos</p></div>
-        <button class="btn-add" onclick="openModal("add-contrato-m")">
+        <button class="btn-add" onclick="openModal('add-contrato-m')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Novo Contrato
         </button>
@@ -923,11 +922,11 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 <!-- Logout -->
 <div class="modal-overlay" id="logout-m">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal("logout-m")">✕</button>
+    <button class="modal-close" onclick="closeModal('logout-m')">✕</button>
     <h3 class="modal-title">Sair da plataforma</h3>
     <p class="modal-sub">Tem certeza que deseja encerrar a sessão?</p>
     <div class="modal-btns">
-      <button class="modal-btn sec" onclick="closeModal("logout-m")">Cancelar</button>
+      <button class="modal-btn sec" onclick="closeModal('logout-m')">Cancelar</button>
       <button class="modal-btn prim" onclick="doLogout()">Sair</button>
     </div>
   </div>
@@ -936,7 +935,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 <!-- Add Bem -->
 <div class="modal-overlay" id="add-bem-m">
   <div class="modal modal-lg">
-    <button class="modal-close" onclick="closeModal("add-bem-m")">✕</button>
+    <button class="modal-close" onclick="closeModal('add-bem-m')">✕</button>
     <h3 class="modal-title">Adicionar Bem</h3>
     <p class="modal-sub">Registre um novo bem ao seu patrimônio</p>
     <div class="form-group">
@@ -976,7 +975,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     </div>
     <div class="form-group"><label class="form-label">Observações</label><textarea class="form-input" id="bem-obs" rows="2" placeholder="Notas sobre o bem..."></textarea></div>
     <div class="modal-btns">
-      <button class="modal-btn sec" onclick="closeModal("add-bem-m")">Cancelar</button>
+      <button class="modal-btn sec" onclick="closeModal('add-bem-m')">Cancelar</button>
       <button class="modal-btn prim" onclick="saveBem()">Salvar Bem</button>
     </div>
   </div>
@@ -985,7 +984,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 <!-- Add Compra Cartão -->
 <div class="modal-overlay" id="add-cc-m">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal("add-cc-m")">✕</button>
+    <button class="modal-close" onclick="closeModal('add-cc-m')">✕</button>
     <h3 class="modal-title">Registrar Compra</h3>
     <p class="modal-sub">Adicione uma compra ao cartão</p>
     <div class="form-group">
@@ -1014,7 +1013,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
       <div class="form-group"><label class="form-label">Data</label><input class="form-input" id="cc-data" type="date"></div>
     </div>
     <div class="modal-btns">
-      <button class="modal-btn sec" onclick="closeModal("add-cc-m")">Cancelar</button>
+      <button class="modal-btn sec" onclick="closeModal('add-cc-m')">Cancelar</button>
       <button class="modal-btn prim" onclick="saveCompra()">Salvar Compra</button>
     </div>
   </div>
@@ -1023,7 +1022,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 <!-- Add Recebimento -->
 <div class="modal-overlay" id="add-rec-m">
   <div class="modal modal-lg">
-    <button class="modal-close" onclick="closeModal("add-rec-m")">✕</button>
+    <button class="modal-close" onclick="closeModal('add-rec-m')">✕</button>
     <h3 class="modal-title">Registrar Recebimento</h3>
     <p class="modal-sub">Registre um aluguel recebido ou pendente</p>
     <div class="form-group">
@@ -1051,7 +1050,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     </div>
     <div class="form-group"><label class="form-label">Observações</label><textarea class="form-input" id="rec-obs" rows="2" placeholder="Ex: Recebido com 2 dias de atraso, pago via PIX..."></textarea></div>
     <div class="modal-btns">
-      <button class="modal-btn sec" onclick="closeModal("add-rec-m")">Cancelar</button>
+      <button class="modal-btn sec" onclick="closeModal('add-rec-m')">Cancelar</button>
       <button class="modal-btn prim" onclick="saveReceita()">Salvar Recebimento</button>
     </div>
   </div>
@@ -1060,7 +1059,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 <!-- Nova Meta -->
 <div class="modal-overlay" id="add-meta-m">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal("add-meta-m")">✕</button>
+    <button class="modal-close" onclick="closeModal('add-meta-m')">✕</button>
     <h3 class="modal-title">Nova Meta de Gasto</h3>
     <p class="modal-sub">Defina um limite mensal para uma categoria</p>
     <div class="form-group">
@@ -1083,7 +1082,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
       <div class="form-group"><label class="form-label">Limite Mensal (R$)</label><input class="form-input" id="meta-limite" type="number" placeholder="500"></div>
     </div>
     <div class="modal-btns">
-      <button class="modal-btn sec" onclick="closeModal("add-meta-m")">Cancelar</button>
+      <button class="modal-btn sec" onclick="closeModal('add-meta-m')">Cancelar</button>
       <button class="modal-btn prim" onclick="saveMeta()">Salvar Meta</button>
     </div>
   </div>
@@ -1092,7 +1091,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 <!-- Novo Contrato -->
 <div class="modal-overlay" id="add-contrato-m">
   <div class="modal modal-lg">
-    <button class="modal-close" onclick="closeModal("add-contrato-m")">✕</button>
+    <button class="modal-close" onclick="closeModal('add-contrato-m')">✕</button>
     <h3 class="modal-title">Novo Contrato de Aluguel</h3>
     <p class="modal-sub">Cadastre os detalhes do contrato e do inquilino</p>
     <div class="form-divider">🏠 Imóvel & Inquilino</div>
@@ -1131,7 +1130,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     </div>
     <div class="form-group"><label class="form-label">Observações</label><textarea class="form-input" id="cont-obs" rows="2" placeholder="Cláusulas especiais, fiadores, etc."></textarea></div>
     <div class="modal-btns">
-      <button class="modal-btn sec" onclick="closeModal("add-contrato-m")">Cancelar</button>
+      <button class="modal-btn sec" onclick="closeModal('add-contrato-m')">Cancelar</button>
       <button class="modal-btn prim" onclick="saveContrato()">Salvar Contrato</button>
     </div>
   </div>
@@ -1140,7 +1139,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 <!-- Modal Nova Meta -->
 <div class="modal-overlay" id="add-meta-m">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal("add-meta-m")">✕</button>
+    <button class="modal-close" onclick="closeModal('add-meta-m')">✕</button>
     <h3 class="modal-title">Nova Meta de Gasto</h3>
     <p class="modal-sub">Defina um limite mensal para uma categoria</p>
     <div class="form-group">
@@ -1169,7 +1168,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
       </div>
     </div>
     <div class="modal-btns">
-      <button class="modal-btn sec" onclick="closeModal("add-meta-m")">Cancelar</button>
+      <button class="modal-btn sec" onclick="closeModal('add-meta-m')">Cancelar</button>
       <button class="modal-btn prim" onclick="saveMeta()">Criar Meta</button>
     </div>
   </div>
@@ -1178,7 +1177,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 <!-- Modal Novo Contrato -->
 <div class="modal-overlay" id="add-contrato-m">
   <div class="modal modal-lg">
-    <button class="modal-close" onclick="closeModal("add-contrato-m")">✕</button>
+    <button class="modal-close" onclick="closeModal('add-contrato-m')">✕</button>
     <h3 class="modal-title">Novo Contrato de Aluguel</h3>
     <p class="modal-sub">Registre o contrato com dados do inquilino e reajuste</p>
     <div class="form-group">
@@ -1218,7 +1217,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     </div>
     <div class="form-group"><label class="form-label">Observações</label><textarea class="form-input" id="cont-obs" rows="2" placeholder="Ex: Contrato com renovação automática..."></textarea></div>
     <div class="modal-btns">
-      <button class="modal-btn sec" onclick="closeModal("add-contrato-m")">Cancelar</button>
+      <button class="modal-btn sec" onclick="closeModal('add-contrato-m')">Cancelar</button>
       <button class="modal-btn prim" onclick="saveContrato()">Salvar Contrato</button>
     </div>
   </div>
@@ -1226,6 +1225,8 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 
 <!-- TOAST -->
 <div class="toast" id="_toast"><div class="toast-icon" id="_ti">ℹ️</div><div><div style="font-size:13px;font-weight:500;color:var(--text)" id="_tt"></div><div style="font-size:12px;color:var(--muted);margin-top:2px" id="_tb"></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 
 <script>
 /* ═══════════ STATE ═══════════ */
@@ -1491,7 +1492,7 @@ function renderDespesas(){
           (c.compras.length===0?'<div style="text-align:center;padding:12px;font-size:12px;color:var(--muted)">Nenhuma compra registrada</div>':
           c.compras.map(function(p){return'<div class="cc-compra"><div class="cc-compra-ico">'+p.cat.split(' ')[0]+'</div><div style="flex:1;min-width:0"><div class="cc-compra-desc">'+p.desc+'</div><div class="cc-compra-cat">'+p.cat+'</div></div><div><div class="cc-compra-val">'+R(p.val)+'</div><div class="cc-compra-date">'+p.data+'</div></div></div>'}).join(''))+
         '</div>'+
-        '<button class="add-compra-btn" onclick="preseleCart(""+k+"")">+ Adicionar compra</button>'+
+        '<button class="add-compra-btn" onclick="preseleCart(this.dataset.k)" data-k="'+k+'"">+ Adicionar compra</button>'+
       '</div>'+
     '</div>'
   }).join('');
@@ -1781,7 +1782,7 @@ function renderFluxo(){
     var parts=m.split('-');
     var lbl=MONTH_NAMES[parseInt(parts[1])-1]+'/'+parts[0].slice(2);
     var act=m===_fcMesSel?' active':'';
-    return '<button class="fc-mes-btn'+act+'" onclick="fcSelMes(""+m+"")">'+lbl+'</button>';
+    return '<button class="fc-mes-btn'+act+'" onclick="fcSelMes(this.dataset.m)" data-m="'+m+'"">'+lbl+'</button>';
   }).join('');
 
   // Dados do mês selecionado
@@ -2246,7 +2247,7 @@ document.getElementById('rec-data').value=new Date().toISOString().slice(0,10);
 document.getElementById('rec-mes').value=new Date().toISOString().slice(0,7);
 document.getElementById('cont-inicio').value=new Date().toISOString().slice(0,10);
 document.getElementById('cont-ultimo-reaj').value=new Date().toISOString().slice(0,10);
-populaSelContrato();
+populaSelBemContratos();
 
 /* ── Enter key no login ── */
 document.addEventListener('DOMContentLoaded', function(){
