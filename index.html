@@ -557,7 +557,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     </div>
     <div class="topbar-right">
       <div class="notif-btn" onclick="toast('🔔 Notificações','3 novos alertas de vencimento.')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><div class="notif-dot"></div></div>
-      <div class="user-menu" onclick="openModal('logout-m')"><div class="user-av">RB</div><div><div class="user-nm">Roberto</div><div class="user-rl">Premium</div></div><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:var(--muted);margin-left:5px"><polyline points="6 9 12 15 18 9"/></svg></div>
+      <div class="user-menu" onclick="openModal("logout-m")"><div class="user-av">RB</div><div><div class="user-nm">Roberto</div><div class="user-rl">Premium</div></div><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="color:var(--muted);margin-left:5px"><polyline points="6 9 12 15 18 9"/></svg></div>
     </div>
   </nav>
 
@@ -570,10 +570,10 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
         <div class="date-badge" id="dbadge"></div>
       </div>
       <div class="summary-grid">
-        <div class="s-card sc-total" onclick="nav(document.querySelector('.nav-btn'),'overview')"><div class="s-icon">💰</div><div class="s-label">Patrimônio Total</div><div class="s-value" id="ov-total">R$ 520.000</div><span class="badge bg">↑ 3,2% este mês</span></div>
-        <div class="s-card sc-imovel" onclick="nav(document.querySelectorAll('.nav-btn')[1],'bens')"><div class="s-icon">🏠</div><div class="s-label">Total em Imóveis</div><div class="s-value" id="ov-imovel">R$ 450.000</div><div class="s-sub">2 imóveis</div></div>
-        <div class="s-card sc-veiculo" onclick="nav(document.querySelectorAll('.nav-btn')[1],'bens')"><div class="s-icon">🚗</div><div class="s-label">Total em Veículos</div><div class="s-value" id="ov-veiculo">R$ 70.000</div><div class="s-sub">1 veículo</div></div>
-        <div class="s-card sc-desp" onclick="nav(document.querySelectorAll('.nav-btn')[2],'despesas')"><div class="s-icon">💳</div><div class="s-label">Fatura Total Cartões</div><div class="s-value" id="ov-desp">R$ 4.280</div><span class="badge br">↑ 12% vs mês ant.</span></div>
+        <div class="s-card sc-total" onclick="nav(document.querySelector(".nav-btn"),'overview')"><div class="s-icon">💰</div><div class="s-label">Patrimônio Total</div><div class="s-value" id="ov-total">R$ 520.000</div><span class="badge bg">↑ 3,2% este mês</span></div>
+        <div class="s-card sc-imovel" onclick="navBtn(1,'bens')"><div class="s-icon">🏠</div><div class="s-label">Total em Imóveis</div><div class="s-value" id="ov-imovel">R$ 450.000</div><div class="s-sub">2 imóveis</div></div>
+        <div class="s-card sc-veiculo" onclick="navBtn(1,'bens')"><div class="s-icon">🚗</div><div class="s-label">Total em Veículos</div><div class="s-value" id="ov-veiculo">R$ 70.000</div><div class="s-sub">1 veículo</div></div>
+        <div class="s-card sc-desp" onclick="navBtn(2,'despesas')"><div class="s-icon">💳</div><div class="s-label">Fatura Total Cartões</div><div class="s-value" id="ov-desp">R$ 4.280</div><span class="badge br">↑ 12% vs mês ant.</span></div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 320px;gap:16px;margin-bottom:16px">
         <div class="panel">
@@ -600,7 +600,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
           <div class="panel-hd"><span class="panel-title">Alertas Inteligentes</span></div>
           <div style="display:flex;flex-direction:column;gap:0">
             <div style="display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--border);cursor:pointer" onclick="toast('⚠️ Despesas','Revisão de seguros e manutenção.')"><div style="font-size:19px;flex-shrink:0;margin-top:1px">⚠️</div><div><strong style="display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px">Despesas subiram 20%</strong><p style="font-size:12px;color:var(--muted2)">Aumento em seguros e manutenção no período atual.</p></div></div>
-            <div style="display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--border);cursor:pointer" onclick="nav(document.querySelectorAll('.nav-btn')[3],'impostos')"><div style="font-size:19px;flex-shrink:0;margin-top:1px">⏰</div><div><strong style="display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px">2 impostos vencem em breve</strong><p style="font-size:12px;color:var(--muted2)">Prepare os pagamentos para evitar multas.</p></div></div>
+            <div style="display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--border);cursor:pointer" onclick="navBtn(3,'impostos')"><div style="font-size:19px;flex-shrink:0;margin-top:1px">⏰</div><div><strong style="display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px">2 impostos vencem em breve</strong><p style="font-size:12px;color:var(--muted2)">Prepare os pagamentos para evitar multas.</p></div></div>
             <div style="display:flex;gap:11px;align-items:flex-start;padding:11px 0;cursor:pointer" onclick="toast('💡 Dica','Manutenção: 16% das despesas. Veja fornecedores alternativos.')"><div style="font-size:19px;flex-shrink:0;margin-top:1px">💡</div><div><strong style="display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px">Sugestão de economia</strong><p style="font-size:12px;color:var(--muted2)">Custos de manutenção representam 16% das despesas.</p></div></div>
           </div>
         </div>
@@ -611,7 +611,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     <div class="section" id="sec-bens">
       <div class="page-hd">
         <div><h1 class="page-title">Meus Bens</h1><p class="page-sub">Gerencie todo o seu patrimônio em um lugar</p></div>
-        <button class="btn-add" onclick="openModal('add-bem-m')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Adicionar Bem</button>
+        <button class="btn-add" onclick="openModal("add-bem-m")"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Adicionar Bem</button>
       </div>
       <div class="summary-grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
         <div class="s-card sc-total"><div class="s-icon">💰</div><div class="s-label">Valor Total dos Bens</div><div class="s-value" id="bens-total-v">R$ 520.000</div><span class="badge bg">3 bens cadastrados</span></div>
@@ -635,11 +635,11 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     <div class="section" id="sec-despesas">
       <div class="page-hd">
         <div><h1 class="page-title">Despesas & Cartões</h1><p class="page-sub">Controle seus gastos por cartão e categoria</p></div>
-        <button class="btn-add" onclick="openModal('add-cc-m')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nova Compra</button>
+        <button class="btn-add" onclick="openModal("add-cc-m")"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nova Compra</button>
       </div>
 
       <div class="dicas-panel" id="dicas-panel">
-        <div class="panel-hd"><span class="panel-title">💡 Análise Inteligente dos seus Gastos</span><button class="panel-action" onclick="this.closest('.dicas-panel').style.display='none'">Ocultar</button></div>
+        <div class="panel-hd"><span class="panel-title">💡 Análise Inteligente dos seus Gastos</span><button class="panel-action" onclick="this.closest(".dicas-panel").style.display='none'">Ocultar</button></div>
         <div id="dicas-content"></div>
       </div>
 
@@ -650,7 +650,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     <div class="section" id="sec-impostos">
       <div class="page-hd">
         <div><h1 class="page-title">Impostos & Obrigações</h1><p class="page-sub">Todos os tributos dos seus bens em um só lugar</p></div>
-        <button class="btn-add" onclick="nav(document.querySelectorAll('.nav-btn')[1],'bens')">🏠 Ir para Meus Bens</button>
+        <button class="btn-add" onclick="navBtn(1,'bens')">🏠 Ir para Meus Bens</button>
       </div>
       <div class="impostos-summary">
         <div class="imp-total-card itc-green"><div class="imp-label">Total de Impostos/Ano</div><div class="imp-value" id="imp-total-ano">R$ 0</div><div class="imp-sub">Soma de todos os bens</div></div>
@@ -700,7 +700,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     <div class="section" id="sec-receitas">
       <div class="page-hd">
         <div><h1 class="page-title">Receitas de Aluguel</h1><p class="page-sub">Acompanhe os recebimentos dos seus imóveis alugados</p></div>
-        <button class="btn-add" onclick="openModal('add-rec-m')">
+        <button class="btn-add" onclick="openModal("add-rec-m")">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Registrar Recebimento
         </button>
@@ -712,7 +712,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
       <!-- Imóveis que geram renda -->
       <div style="display:grid;grid-template-columns:1fr 340px;gap:16px;margin-bottom:18px">
         <div class="panel">
-          <div class="panel-hd"><span class="panel-title">Imóveis Gerando Renda</span><button class="panel-action" onclick="nav(document.querySelectorAll('.nav-btn')[1],'bens')">Gerenciar bens →</button></div>
+          <div class="panel-hd"><span class="panel-title">Imóveis Gerando Renda</span><button class="panel-action" onclick="navBtn(1,'bens')">Gerenciar bens →</button></div>
           <div id="rec-imoveis-list"></div>
         </div>
         <div class="panel">
@@ -855,7 +855,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     <div class="section" id="sec-metas">
       <div class="page-hd">
         <div><h1 class="page-title">Metas & Orçamentos</h1><p class="page-sub">Defina limites de gastos por categoria e acompanhe o progresso</p></div>
-        <button class="btn-add" onclick="openModal('add-meta-m')">
+        <button class="btn-add" onclick="openModal("add-meta-m")">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Nova Meta
         </button>
@@ -873,7 +873,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     <div class="section" id="sec-contratos">
       <div class="page-hd">
         <div><h1 class="page-title">Contratos de Aluguel</h1><p class="page-sub">Gerencie contratos, reajustes IGPM/IPCA e inquilinos</p></div>
-        <button class="btn-add" onclick="openModal('add-contrato-m')">
+        <button class="btn-add" onclick="openModal("add-contrato-m")">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Novo Contrato
         </button>
@@ -923,11 +923,11 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 <!-- Logout -->
 <div class="modal-overlay" id="logout-m">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('logout-m')">✕</button>
+    <button class="modal-close" onclick="closeModal("logout-m")">✕</button>
     <h3 class="modal-title">Sair da plataforma</h3>
     <p class="modal-sub">Tem certeza que deseja encerrar a sessão?</p>
     <div class="modal-btns">
-      <button class="modal-btn sec" onclick="closeModal('logout-m')">Cancelar</button>
+      <button class="modal-btn sec" onclick="closeModal("logout-m")">Cancelar</button>
       <button class="modal-btn prim" onclick="doLogout()">Sair</button>
     </div>
   </div>
@@ -936,7 +936,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 <!-- Add Bem -->
 <div class="modal-overlay" id="add-bem-m">
   <div class="modal modal-lg">
-    <button class="modal-close" onclick="closeModal('add-bem-m')">✕</button>
+    <button class="modal-close" onclick="closeModal("add-bem-m")">✕</button>
     <h3 class="modal-title">Adicionar Bem</h3>
     <p class="modal-sub">Registre um novo bem ao seu patrimônio</p>
     <div class="form-group">
@@ -976,7 +976,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     </div>
     <div class="form-group"><label class="form-label">Observações</label><textarea class="form-input" id="bem-obs" rows="2" placeholder="Notas sobre o bem..."></textarea></div>
     <div class="modal-btns">
-      <button class="modal-btn sec" onclick="closeModal('add-bem-m')">Cancelar</button>
+      <button class="modal-btn sec" onclick="closeModal("add-bem-m")">Cancelar</button>
       <button class="modal-btn prim" onclick="saveBem()">Salvar Bem</button>
     </div>
   </div>
@@ -985,7 +985,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 <!-- Add Compra Cartão -->
 <div class="modal-overlay" id="add-cc-m">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('add-cc-m')">✕</button>
+    <button class="modal-close" onclick="closeModal("add-cc-m")">✕</button>
     <h3 class="modal-title">Registrar Compra</h3>
     <p class="modal-sub">Adicione uma compra ao cartão</p>
     <div class="form-group">
@@ -1014,7 +1014,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
       <div class="form-group"><label class="form-label">Data</label><input class="form-input" id="cc-data" type="date"></div>
     </div>
     <div class="modal-btns">
-      <button class="modal-btn sec" onclick="closeModal('add-cc-m')">Cancelar</button>
+      <button class="modal-btn sec" onclick="closeModal("add-cc-m")">Cancelar</button>
       <button class="modal-btn prim" onclick="saveCompra()">Salvar Compra</button>
     </div>
   </div>
@@ -1023,7 +1023,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 <!-- Add Recebimento -->
 <div class="modal-overlay" id="add-rec-m">
   <div class="modal modal-lg">
-    <button class="modal-close" onclick="closeModal('add-rec-m')">✕</button>
+    <button class="modal-close" onclick="closeModal("add-rec-m")">✕</button>
     <h3 class="modal-title">Registrar Recebimento</h3>
     <p class="modal-sub">Registre um aluguel recebido ou pendente</p>
     <div class="form-group">
@@ -1051,7 +1051,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     </div>
     <div class="form-group"><label class="form-label">Observações</label><textarea class="form-input" id="rec-obs" rows="2" placeholder="Ex: Recebido com 2 dias de atraso, pago via PIX..."></textarea></div>
     <div class="modal-btns">
-      <button class="modal-btn sec" onclick="closeModal('add-rec-m')">Cancelar</button>
+      <button class="modal-btn sec" onclick="closeModal("add-rec-m")">Cancelar</button>
       <button class="modal-btn prim" onclick="saveReceita()">Salvar Recebimento</button>
     </div>
   </div>
@@ -1060,7 +1060,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 <!-- Nova Meta -->
 <div class="modal-overlay" id="add-meta-m">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('add-meta-m')">✕</button>
+    <button class="modal-close" onclick="closeModal("add-meta-m")">✕</button>
     <h3 class="modal-title">Nova Meta de Gasto</h3>
     <p class="modal-sub">Defina um limite mensal para uma categoria</p>
     <div class="form-group">
@@ -1083,7 +1083,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
       <div class="form-group"><label class="form-label">Limite Mensal (R$)</label><input class="form-input" id="meta-limite" type="number" placeholder="500"></div>
     </div>
     <div class="modal-btns">
-      <button class="modal-btn sec" onclick="closeModal('add-meta-m')">Cancelar</button>
+      <button class="modal-btn sec" onclick="closeModal("add-meta-m")">Cancelar</button>
       <button class="modal-btn prim" onclick="saveMeta()">Salvar Meta</button>
     </div>
   </div>
@@ -1092,7 +1092,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 <!-- Novo Contrato -->
 <div class="modal-overlay" id="add-contrato-m">
   <div class="modal modal-lg">
-    <button class="modal-close" onclick="closeModal('add-contrato-m')">✕</button>
+    <button class="modal-close" onclick="closeModal("add-contrato-m")">✕</button>
     <h3 class="modal-title">Novo Contrato de Aluguel</h3>
     <p class="modal-sub">Cadastre os detalhes do contrato e do inquilino</p>
     <div class="form-divider">🏠 Imóvel & Inquilino</div>
@@ -1131,7 +1131,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     </div>
     <div class="form-group"><label class="form-label">Observações</label><textarea class="form-input" id="cont-obs" rows="2" placeholder="Cláusulas especiais, fiadores, etc."></textarea></div>
     <div class="modal-btns">
-      <button class="modal-btn sec" onclick="closeModal('add-contrato-m')">Cancelar</button>
+      <button class="modal-btn sec" onclick="closeModal("add-contrato-m")">Cancelar</button>
       <button class="modal-btn prim" onclick="saveContrato()">Salvar Contrato</button>
     </div>
   </div>
@@ -1140,7 +1140,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 <!-- Modal Nova Meta -->
 <div class="modal-overlay" id="add-meta-m">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal('add-meta-m')">✕</button>
+    <button class="modal-close" onclick="closeModal("add-meta-m")">✕</button>
     <h3 class="modal-title">Nova Meta de Gasto</h3>
     <p class="modal-sub">Defina um limite mensal para uma categoria</p>
     <div class="form-group">
@@ -1169,7 +1169,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
       </div>
     </div>
     <div class="modal-btns">
-      <button class="modal-btn sec" onclick="closeModal('add-meta-m')">Cancelar</button>
+      <button class="modal-btn sec" onclick="closeModal("add-meta-m")">Cancelar</button>
       <button class="modal-btn prim" onclick="saveMeta()">Criar Meta</button>
     </div>
   </div>
@@ -1178,7 +1178,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 <!-- Modal Novo Contrato -->
 <div class="modal-overlay" id="add-contrato-m">
   <div class="modal modal-lg">
-    <button class="modal-close" onclick="closeModal('add-contrato-m')">✕</button>
+    <button class="modal-close" onclick="closeModal("add-contrato-m")">✕</button>
     <h3 class="modal-title">Novo Contrato de Aluguel</h3>
     <p class="modal-sub">Registre o contrato com dados do inquilino e reajuste</p>
     <div class="form-group">
@@ -1218,7 +1218,7 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
     </div>
     <div class="form-group"><label class="form-label">Observações</label><textarea class="form-input" id="cont-obs" rows="2" placeholder="Ex: Contrato com renovação automática..."></textarea></div>
     <div class="modal-btns">
-      <button class="modal-btn sec" onclick="closeModal('add-contrato-m')">Cancelar</button>
+      <button class="modal-btn sec" onclick="closeModal("add-contrato-m")">Cancelar</button>
       <button class="modal-btn prim" onclick="saveContrato()">Salvar Contrato</button>
     </div>
   </div>
@@ -1299,6 +1299,8 @@ function toast(title,body){
 }
 
 /* ═══════════ NAV ═══════════ */
+function navBtn(n,sec){ nav(document.querySelectorAll('.nav-btn')[n], sec); }
+function navBtn(n,sec){ nav(document.querySelectorAll('.nav-btn')[n], sec); }
 function nav(btn,sec){
   document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active')});
   if(btn)btn.classList.add('active');
@@ -1427,7 +1429,7 @@ function renderBensCards(filter){
       '</div>'+
       '<div class="bem-card-footer">'+
         '<button class="bem-btn" onclick="editBem('+b.id+')">✏️ Editar</button>'+
-        '<button class="bem-btn" onclick="nav(document.querySelectorAll('.nav-btn')[3],'impostos')">📋 Impostos</button>'+
+        '<button class="bem-btn" onclick="navBtn(3,\"impostos\")">📋 Impostos</button>'+
         '<button class="bem-btn danger" onclick="delBem('+b.id+')">🗑️ Excluir</button>'+
       '</div>'+
     '</div>'
@@ -1489,7 +1491,7 @@ function renderDespesas(){
           (c.compras.length===0?'<div style="text-align:center;padding:12px;font-size:12px;color:var(--muted)">Nenhuma compra registrada</div>':
           c.compras.map(function(p){return'<div class="cc-compra"><div class="cc-compra-ico">'+p.cat.split(' ')[0]+'</div><div style="flex:1;min-width:0"><div class="cc-compra-desc">'+p.desc+'</div><div class="cc-compra-cat">'+p.cat+'</div></div><div><div class="cc-compra-val">'+R(p.val)+'</div><div class="cc-compra-date">'+p.data+'</div></div></div>'}).join(''))+
         '</div>'+
-        '<button class="add-compra-btn" onclick="preseleCart(''+k+'')">+ Adicionar compra</button>'+
+        '<button class="add-compra-btn" onclick="preseleCart(""+k+"")">+ Adicionar compra</button>'+
       '</div>'+
     '</div>'
   }).join('');
@@ -1779,7 +1781,7 @@ function renderFluxo(){
     var parts=m.split('-');
     var lbl=MONTH_NAMES[parseInt(parts[1])-1]+'/'+parts[0].slice(2);
     var act=m===_fcMesSel?' active':'';
-    return '<button class="fc-mes-btn'+act+'" onclick="fcSelMes(''+m+'')">'+lbl+'</button>';
+    return '<button class="fc-mes-btn'+act+'" onclick="fcSelMes(""+m+"")">'+lbl+'</button>';
   }).join('');
 
   // Dados do mês selecionado
@@ -2229,7 +2231,7 @@ function gerarPDF(){
 
 <!-- iOS Install Hint -->
 <div id="ios-hint">
-  <button class="ios-close" onclick="document.getElementById('ios-hint').style.display='none'">✕</button>
+  <button class="ios-close" onclick="document.getElementById("ios-hint").style.display='none'">✕</button>
   <p>Para instalar o <strong>Valora</strong> no seu iPhone:<br>
   Toque em <strong>⎙ Compartilhar</strong> e depois em<br>
   <strong>"Adicionar à Tela de Início"</strong></p>
