@@ -1323,29 +1323,14 @@ function togglePwd(){
   else{i.type='password';b.innerHTML='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'}
 }
 function doLogin(){
-  var emailEl=document.getElementById('ei');
-  var passEl=document.getElementById('pi');
-  var email=emailEl?emailEl.value.trim():'';
-  var pass=passEl?passEl.value:'';
-  var eeEl=document.getElementById('ee');
-  var peEl=document.getElementById('pe');
-  if(eeEl)eeEl.style.display='none';
-  if(peEl)peEl.style.display='none';
-  if(emailEl)emailEl.classList.remove('error');
-  if(passEl)passEl.classList.remove('error');
-  var ok=true;
-  if(email.length<1){if(eeEl)eeEl.style.display='block';if(emailEl)emailEl.classList.add('error');ok=false}
-  if(pass!=='senha123'){if(peEl)peEl.style.display='block';if(passEl)passEl.classList.add('error');ok=false}
-  if(!ok)return;
-  var btn=document.getElementById('lbtn');
-  var btxt=document.getElementById('lbtxt');
-  if(btxt)btxt.innerHTML='<span class="spinner"></span>Entrando...';
-  if(btn)btn.disabled=true;
-  setTimeout(function(){
-    showDash();
-    if(btn)btn.disabled=false;
-    if(btxt)btxt.textContent='Entrar na plataforma';
-  },1000);
+  var pass = document.getElementById('pi') ? document.getElementById('pi').value : '';
+  var peEl = document.getElementById('pe');
+  if(peEl) peEl.style.display = 'none';
+  if(pass !== 'senha123'){
+    if(peEl){ peEl.style.display = 'block'; peEl.textContent = 'Senha incorreta. Use: senha123'; }
+    return;
+  }
+  showDash();
 }
 function demoLogin(){
   var ei=document.getElementById('ei');
@@ -1442,7 +1427,7 @@ function renderBensCards(filter){
       '</div>'+
       '<div class="bem-card-footer">'+
         '<button class="bem-btn" onclick="editBem('+b.id+')">✏️ Editar</button>'+
-        '<button class="bem-btn" onclick="nav(document.querySelectorAll(\'.nav-btn\')[3],\'impostos\')">📋 Impostos</button>'+
+        '<button class="bem-btn" onclick="nav(document.querySelectorAll('.nav-btn')[3],'impostos')">📋 Impostos</button>'+
         '<button class="bem-btn danger" onclick="delBem('+b.id+')">🗑️ Excluir</button>'+
       '</div>'+
     '</div>'
@@ -1504,7 +1489,7 @@ function renderDespesas(){
           (c.compras.length===0?'<div style="text-align:center;padding:12px;font-size:12px;color:var(--muted)">Nenhuma compra registrada</div>':
           c.compras.map(function(p){return'<div class="cc-compra"><div class="cc-compra-ico">'+p.cat.split(' ')[0]+'</div><div style="flex:1;min-width:0"><div class="cc-compra-desc">'+p.desc+'</div><div class="cc-compra-cat">'+p.cat+'</div></div><div><div class="cc-compra-val">'+R(p.val)+'</div><div class="cc-compra-date">'+p.data+'</div></div></div>'}).join(''))+
         '</div>'+
-        '<button class="add-compra-btn" onclick="preseleCart(\''+k+'\')">+ Adicionar compra</button>'+
+        '<button class="add-compra-btn" onclick="preseleCart(''+k+'')">+ Adicionar compra</button>'+
       '</div>'+
     '</div>'
   }).join('');
@@ -1615,7 +1600,7 @@ function renderReceitas(){
       var receitaAno=(b.aluguel||0)*12;
       var lucroLiq=receitaAno-custoAno;
       var rentab=b.valor>0?((receitaAno/b.valor)*100).toFixed(1):0;
-      return '<div style="display:flex;align-items:center;gap:13px;padding:13px;background:var(--navy3);border:1px solid var(--border);border-radius:11px;margin-bottom:9px;cursor:pointer;transition:border-color .15s" onmouseover="this.style.borderColor=\'var(--border2)\'" onmouseout="this.style.borderColor=\'var(--border)\'">'+ 
+      return '<div style="display:flex;align-items:center;gap:13px;padding:13px;background:var(--navy3);border:1px solid var(--border);border-radius:11px;margin-bottom:9px;cursor:pointer;transition:border-color .15s" onmouseover="this.style.borderColor='var(--border2)'" onmouseout="this.style.borderColor='var(--border)'">'+ 
         '<div style="width:42px;height:42px;border-radius:11px;background:rgba(31,214,160,.13);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🏠</div>'+
         '<div style="flex:1;min-width:0">'+
           '<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+b.nome+'</div>'+
@@ -1658,7 +1643,7 @@ function renderReceitas(){
         '<td style="font-weight:500;color:'+(r.recebido>0?'var(--green)':'var(--muted)')+'">'+R(r.recebido)+'</td>'+
         '<td>'+(r.data||'—')+'</td>'+
         '<td>'+STATUS_MAP[r.status]+'</td>'+
-        '<td><button style="background:none;border:none;color:var(--muted2);cursor:pointer;font-size:12px;padding:3px 8px;border-radius:6px;border:1px solid var(--border);transition:all .15s" onmouseover="this.style.color=\'var(--red)\';this.style.borderColor=\'rgba(240,76,76,.4)\'" onmouseout="this.style.color=\'var(--muted2)\';this.style.borderColor=\'var(--border)\'" onclick="delReceita('+r.id+')">🗑️</button></td>'+
+        '<td><button style="background:none;border:none;color:var(--muted2);cursor:pointer;font-size:12px;padding:3px 8px;border-radius:6px;border:1px solid var(--border);transition:all .15s" onmouseover="this.style.color='var(--red)';this.style.borderColor='rgba(240,76,76,.4)'" onmouseout="this.style.color='var(--muted2)';this.style.borderColor='var(--border)'" onclick="delReceita('+r.id+')">🗑️</button></td>'+
       '</tr>';
     }).join('');
   document.getElementById('rec-foot-contrato').textContent=lista.length?R(totC):'—';
@@ -1794,7 +1779,7 @@ function renderFluxo(){
     var parts=m.split('-');
     var lbl=MONTH_NAMES[parseInt(parts[1])-1]+'/'+parts[0].slice(2);
     var act=m===_fcMesSel?' active':'';
-    return '<button class="fc-mes-btn'+act+'" onclick="fcSelMes(\''+m+'\')">'+lbl+'</button>';
+    return '<button class="fc-mes-btn'+act+'" onclick="fcSelMes(''+m+'')">'+lbl+'</button>';
   }).join('');
 
   // Dados do mês selecionado
@@ -2261,6 +2246,14 @@ document.getElementById('rec-mes').value=new Date().toISOString().slice(0,7);
 document.getElementById('cont-inicio').value=new Date().toISOString().slice(0,10);
 document.getElementById('cont-ultimo-reaj').value=new Date().toISOString().slice(0,10);
 populaSelContrato();
+
+/* ── Enter key no login ── */
+document.addEventListener('DOMContentLoaded', function(){
+  var pi = document.getElementById('pi');
+  if(pi) pi.addEventListener('keypress', function(e){ if(e.key==='Enter') doLogin(); });
+  var ei = document.getElementById('ei');
+  if(ei) ei.addEventListener('keypress', function(e){ if(e.key==='Enter') doLogin(); });
+});
 
 /* ═══════════ PWA ═══════════ */
 var _deferredPrompt = null;
