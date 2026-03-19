@@ -2524,9 +2524,12 @@ document.addEventListener('DOMContentLoaded', function(){
 /* ═══════════ PWA ═══════════ */
 var _deferredPrompt = null;
 
-// Register service worker
+// Register service worker — apenas em HTTPS real (não em preview/iframe)
 (function() {
   if (!('serviceWorker' in navigator)) return;
+  var host = location.hostname;
+  var isPreview = host === 'www.claudeusercontent.com' || host === 'localhost' || host === '127.0.0.1' || host === '';
+  if (isPreview) return;
   navigator.serviceWorker.register('/sw.js').catch(function(e){ console.warn('SW:', e); });
 })();
 
@@ -2578,6 +2581,7 @@ var supa = null;
 
 function initSupabase() {
   try {
+    if (!window.supabase) { console.warn('Supabase SDK não carregado'); return; }
     supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
     console.log('✅ Supabase conectado');
   } catch(e) {
@@ -2627,7 +2631,7 @@ async function sbLoadBens() {
   if (!supa) return null;
   try {
     var { data, error } = await supa.from('bens').select('*').eq('user_id', getUserId()).order('criado_em', {ascending: true});
-    if (error) { console.warn('sbLoadBens:', error.message); return null; }
+    if (error) { if (error.message && error.message.includes('postMessage')) return null; console.debug('sb:', error.message); return null; }
     return data;
   } catch(e) { return null; }
 }
@@ -2659,7 +2663,7 @@ async function sbLoadReceitas() {
   if (!supa) return null;
   try {
     var { data, error } = await supa.from('receitas').select('*').eq('user_id', getUserId()).order('criado_em', {ascending: false});
-    if (error) { console.warn('sbLoadReceitas:', error.message); return null; }
+    if (error) { if (error.message && error.message.includes('postMessage')) return null; console.debug('sb:', error.message); return null; }
     return data;
   } catch(e) { return null; }
 }
@@ -2692,7 +2696,7 @@ async function sbLoadContratos() {
   if (!supa) return null;
   try {
     var { data, error } = await supa.from('contratos').select('*').eq('user_id', getUserId()).order('criado_em', {ascending: true});
-    if (error) { console.warn('sbLoadContratos:', error.message); return null; }
+    if (error) { if (error.message && error.message.includes('postMessage')) return null; console.debug('sb:', error.message); return null; }
     return data;
   } catch(e) { return null; }
 }
@@ -2722,7 +2726,7 @@ async function sbLoadMetas() {
   if (!supa) return null;
   try {
     var { data, error } = await supa.from('metas').select('*').eq('user_id', getUserId()).order('criado_em', {ascending: true});
-    if (error) { console.warn('sbLoadMetas:', error.message); return null; }
+    if (error) { if (error.message && error.message.includes('postMessage')) return null; console.debug('sb:', error.message); return null; }
     return data;
   } catch(e) { return null; }
 }
@@ -2730,6 +2734,12 @@ async function sbLoadMetas() {
 /* ── SYNC: carrega tudo do banco ao fazer login ── */
 async function syncFromDB() {
   if (!supa) return;
+  // Não sincronizar em ambientes restritos (preview/iframe)
+  try {
+    var host = location.hostname;
+    var restricted = host === 'www.claudeusercontent.com' || host === '' || host === 'localhost';
+    if (restricted) { console.log('ℹ️ Sync desabilitado em preview'); return; }
+  } catch(e) { return; }
 
   toast('🔄 Sincronizando dados...', 'Carregando do banco de dados.');
 
