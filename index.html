@@ -456,6 +456,194 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
   .topbar-right .user-nm,.topbar-right .user-rl{display:none}
   .user-menu{padding:4px 6px 4px 4px}
 }
+
+/* ── SIDEBAR ── */
+:root { --sidebar-w: 220px; --sidebar-collapsed: 64px; }
+
+#dashboard-page { flex-direction: row !important; }
+
+.sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  background: var(--navy2);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  flex-shrink: 0;
+  transition: width .25s cubic-bezier(.4,0,.2,1);
+  overflow: hidden;
+  z-index: 100;
+}
+.sidebar.collapsed { width: var(--sidebar-collapsed); }
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 58px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.sidebar-brand-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 17px;
+  color: var(--text);
+  letter-spacing: -.3px;
+  transition: opacity .2s;
+}
+.sidebar.collapsed .sidebar-brand-name { opacity: 0; width: 0; }
+
+.sidebar-toggle {
+  width: 28px;
+  height: 28px;
+  background: var(--navy3);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background .15s;
+  color: var(--muted2);
+}
+.sidebar-toggle:hover { background: var(--navy4); color: var(--text); }
+.sidebar.collapsed .sidebar-toggle { margin: 0 auto; }
+
+.sidebar-nav {
+  flex: 1;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.snav-btn {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 10px;
+  border-radius: 9px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--muted2);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  text-align: left;
+  width: 100%;
+  white-space: nowrap;
+  transition: background .15s, color .15s;
+  position: relative;
+}
+.snav-btn:hover { background: var(--navy3); color: var(--text); }
+.snav-btn.active {
+  background: rgba(31,214,160,.12);
+  color: var(--green);
+}
+.snav-btn.active .snav-ico { color: var(--green); }
+.snav-ico {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.snav-label {
+  transition: opacity .2s, width .2s;
+  overflow: hidden;
+}
+.sidebar.collapsed .snav-label { opacity: 0; width: 0; }
+.snav-badge {
+  margin-left: auto;
+  width: 6px;
+  height: 6px;
+  background: var(--red);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: opacity .2s;
+}
+.sidebar.collapsed .snav-badge { opacity: 0; }
+
+/* Tooltip no collapsed */
+.sidebar.collapsed .snav-btn:hover::after {
+  content: attr(data-label);
+  position: absolute;
+  left: calc(var(--sidebar-collapsed) + 4px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--navy4);
+  color: var(--text);
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 999;
+  box-shadow: 0 4px 16px rgba(0,0,0,.3);
+}
+
+.sidebar-footer {
+  padding: 10px 8px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+/* Dashboard wrapper com sidebar */
+.dash-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Topbar sem nav */
+.topbar { position: sticky; top: 0; z-index: 50; }
+.topbar-nav { display: none !important; }
+
+/* Main content ocupa espaço restante */
+.main-content { flex: 1; }
+
+/* Mobile */
+@media(max-width:768px){
+  .sidebar { 
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    z-index: 300;
+    transform: translateX(0);
+  }
+  .sidebar.collapsed { 
+    transform: translateX(calc(-1 * var(--sidebar-collapsed)));
+    width: var(--sidebar-w);
+  }
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 299;
+  }
+  .sidebar-overlay.show { display: block; }
+  .dash-wrapper { margin-left: 0 !important; }
+}
+
 </style>
 </head>
 <body>
@@ -532,6 +720,92 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 
 <!-- ═══════ DASHBOARD ═══════ -->
 <div id="dashboard-page">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a class="sidebar-brand" href="#">
+        <div class="topbar-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px">
+  <path d="M24 4L6 14v12c0 9.4 7.6 18.2 18 20 10.4-1.8 18-10.6 18-20V14L24 4z" fill="#0d2235" stroke="#1fd6a0" stroke-width="2"/>
+  <path d="M24 8L9 16.5v10c0 7.8 6.3 15 15 16.6 8.7-1.6 15-8.8 15-16.6v-10L24 8z" fill="#1fd6a0" opacity="0.18"/>
+  <polyline points="15,25 21,32 34,18" stroke="#1fd6a0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <line x1="30" y1="12" x2="41" y2="2" stroke="#1fd6a0" stroke-width="2.5" stroke-linecap="round"/>
+  <polyline points="35,2 41,2 41,8" stroke="#1fd6a0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg></div>
+        <span class="sidebar-brand-name">Valora</span>
+      </a>
+      <button class="sidebar-toggle" onclick="toggleSidebar()" title="Recolher menu">
+        <svg id="sidebar-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="snav-btn active nav-btn" data-sec="overview" data-label="Visão Geral" onclick="snavClick(this,'overview')">
+        <span class="snav-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
+        <span class="snav-label">Visão Geral</span>
+      </button>
+
+      <button class="snav-btn nav-btn" data-sec="bens" data-label="Meus Bens" onclick="snavClick(this,'bens')">
+        <span class="snav-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+        <span class="snav-label">Meus Bens</span>
+      </button>
+
+      <button class="snav-btn nav-btn" data-sec="despesas" data-label="Despesas" onclick="snavClick(this,'despesas')">
+        <span class="snav-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
+        <span class="snav-label">Despesas</span>
+        <span class="snav-badge"></span>
+      </button>
+
+      <button class="snav-btn nav-btn" data-sec="impostos" data-label="Impostos" onclick="snavClick(this,'impostos')">
+        <span class="snav-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></span>
+        <span class="snav-label">Impostos</span>
+      </button>
+
+      <button class="snav-btn nav-btn" data-sec="receitas" data-label="Receitas" onclick="snavClick(this,'receitas')">
+        <span class="snav-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+        <span class="snav-label">Receitas</span>
+      </button>
+
+      <button class="snav-btn nav-btn" data-sec="fluxo" data-label="Fluxo de Caixa" onclick="snavClick(this,'fluxo')">
+        <span class="snav-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+        <span class="snav-label">Fluxo de Caixa</span>
+      </button>
+
+      <button class="snav-btn nav-btn" data-sec="calendario" data-label="Calendário" onclick="snavClick(this,'calendario')">
+        <span class="snav-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+        <span class="snav-label">Calendário</span>
+      </button>
+
+      <button class="snav-btn nav-btn" data-sec="metas" data-label="Metas" onclick="snavClick(this,'metas')">
+        <span class="snav-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+        <span class="snav-label">Metas</span>
+      </button>
+
+      <button class="snav-btn nav-btn" data-sec="contratos" data-label="Contratos" onclick="snavClick(this,'contratos')">
+        <span class="snav-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"/><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"/></svg></span>
+        <span class="snav-label">Contratos</span>
+      </button>
+
+      <button class="snav-btn nav-btn" data-sec="relatorios" data-label="Relatórios" onclick="snavClick(this,'relatorios')">
+        <span class="snav-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="18" y="3" width="4" height="18" rx="1"/><rect x="10" y="8" width="4" height="13" rx="1"/><rect x="2" y="13" width="4" height="8" rx="1"/></svg></span>
+        <span class="snav-label">Relatórios</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="snav-btn" onclick="openModal('logout-m')" data-label="Sair">
+        <span class="snav-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span>
+        <span class="snav-label">Sair</span>
+      </button>
+    </div>
+  </div>
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <!-- DASH WRAPPER -->
+  <div class="dash-wrapper">
+
   <nav class="topbar">
     <div style="display:flex;align-items:center">
       <a class="topbar-brand" href="#"><div class="topbar-icon"><svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px">
@@ -541,18 +815,6 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
   <line x1="30" y1="12" x2="41" y2="2" stroke="#1fd6a0" stroke-width="2.5" stroke-linecap="round"/>
   <polyline points="35,2 41,2 41,8" stroke="#1fd6a0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
 </svg></div><span class="topbar-name" style="margin-left:8px">Valora</span></a>
-      <nav class="topbar-nav">
-        <button class="nav-btn active" onclick="nav(this,'overview')">Visão Geral</button>
-        <button class="nav-btn" onclick="nav(this,'bens')">Meus Bens</button>
-        <button class="nav-btn" onclick="nav(this,'despesas')">Despesas<span class="nb"></span></button>
-        <button class="nav-btn" onclick="nav(this,'impostos')">Impostos</button>
-        <button class="nav-btn" onclick="nav(this,'receitas')">Receitas</button>
-        <button class="nav-btn" onclick="nav(this,'fluxo')">Fluxo de Caixa</button>
-        <button class="nav-btn" onclick="nav(this,'calendario')">Calendário</button>
-        <button class="nav-btn" onclick="nav(this,'metas')">Metas</button>
-        <button class="nav-btn" onclick="nav(this,'contratos')">Contratos</button>
-        <button class="nav-btn" onclick="nav(this,'relatorios')">Relatórios</button>
-      </nav>
     </div>
     <div class="topbar-right">
       <div class="notif-btn" onclick="toast('🔔 Notificações','3 novos alertas de vencimento.')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><div class="notif-dot"></div></div>
@@ -1225,6 +1487,8 @@ input,select,textarea,button{font-family:'DM Sans',sans-serif}
 
 <!-- TOAST -->
 <div class="toast" id="_toast"><div class="toast-icon" id="_ti">ℹ️</div><div><div style="font-size:13px;font-weight:500;color:var(--text)" id="_tt"></div><div style="font-size:12px;color:var(--muted);margin-top:2px" id="_tb"></div></div></div>
+  </div><!-- /dash-wrapper -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 
@@ -1300,8 +1564,8 @@ function toast(title,body){
 }
 
 /* ═══════════ NAV ═══════════ */
-function navBtn(n,sec){ nav(document.querySelectorAll('.nav-btn')[n], sec); }
-function navBtn(n,sec){ nav(document.querySelectorAll('.nav-btn')[n], sec); }
+function navBtn(n,sec){ var btns=document.querySelectorAll('.snav-btn'); snavClick(btns[n]||btns[0], sec); }
+function navBtn(n,sec){ var btns=document.querySelectorAll('.snav-btn'); snavClick(btns[n]||btns[0], sec); }
 function nav(btn,sec){
   document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active')});
   if(btn)btn.classList.add('active');
@@ -2530,6 +2794,70 @@ async function syncFromDB() {
   toast('✅ Dados carregados!', 'Tudo sincronizado com o banco.');
   renderBens();
 }
+
+
+/* ── SIDEBAR ── */
+function toggleSidebar(){
+  var sb = document.getElementById('sidebar');
+  var arrow = document.getElementById('sidebar-arrow');
+  var overlay = document.getElementById('sidebar-overlay');
+  var collapsed = sb.classList.toggle('collapsed');
+  // Girar seta
+  arrow.style.transform = collapsed ? 'rotate(180deg)' : 'rotate(0deg)';
+  // Mobile overlay
+  if(window.innerWidth <= 768){
+    overlay.classList.toggle('show', !collapsed);
+  }
+  // Salvar estado
+  try{ localStorage.setItem('sidebar-collapsed', collapsed ? '1' : '0'); }catch(e){}
+}
+
+function snavClick(btn, sec){
+  // Atualizar active
+  document.querySelectorAll('.snav-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  // Mostrar seção
+  document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+  var target = document.getElementById('sec-' + sec.charAt(0));
+  if(!target){
+    // fallback: tentar pelo id completo
+    target = document.getElementById('sec-' + sec);
+  }
+  if(target) target.classList.add('active');
+  // Render da seção
+  var renders = {
+    overview: function(){ try{ initOvCharts(); renderBensCards(); }catch(e){} },
+    bens: function(){ try{ renderBens(); }catch(e){} },
+    despesas: function(){ try{ renderDespesas(); }catch(e){} },
+    impostos: function(){ try{ renderImpostos(); }catch(e){} },
+    receitas: function(){ try{ renderReceitas(); }catch(e){} },
+    fluxo: function(){ try{ renderFluxo(); }catch(e){} },
+    calendario: function(){ try{ renderCalendario(); }catch(e){} },
+    metas: function(){ try{ renderMetas(); }catch(e){} },
+    contratos: function(){ try{ renderContratos(); }catch(e){} },
+    relatorios: function(){ try{ renderRelatorio(); }catch(e){} }
+  };
+  if(renders[sec]) renders[sec]();
+  // Mobile: fechar sidebar ao navegar
+  if(window.innerWidth <= 768){
+    document.getElementById('sidebar').classList.add('collapsed');
+    document.getElementById('sidebar-overlay').classList.remove('show');
+  }
+}
+
+// Restaurar estado da sidebar
+(function(){
+  try{
+    if(localStorage.getItem('sidebar-collapsed') === '1'){
+      var sb = document.getElementById('sidebar');
+      if(sb){ 
+        sb.classList.add('collapsed');
+        var arrow = document.getElementById('sidebar-arrow');
+        if(arrow) arrow.style.transform = 'rotate(180deg)';
+      }
+    }
+  }catch(e){}
+})();
 
 </script>
 </body>
