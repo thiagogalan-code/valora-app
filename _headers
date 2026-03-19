@@ -6,9 +6,11 @@
 
 /*.html
   Content-Type: text/html; charset=utf-8
+  Cache-Control: no-cache, no-store, must-revalidate
 
 /
   Content-Type: text/html; charset=utf-8
+  Cache-Control: no-cache, no-store, must-revalidate
 
 /sw.js
   Cache-Control: no-cache, no-store, must-revalidate
@@ -16,8 +18,8 @@
 
 /manifest.json
   Content-Type: application/manifest+json
-  Cache-Control: public, max-age=3600
+  Cache-Control: no-cache
 
 /*.svg
   Cache-Control: public, max-age=86400
-  Content-Type: image/svg+xml; charset=utf-8
+  Content-Type: image/svg+xml
